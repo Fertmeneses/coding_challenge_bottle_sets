@@ -1,17 +1,20 @@
 # To be updated
 
-def functionX(s: list) -> bool:
+def optim_sets(stock: list) -> int:
 
 	# Implement your code
 
-	result = None
+	best_N = len(stock)
 
-	return result
+	return 3
 
-# Evaluate challenge (DON'T MODIFY):
+# # Evaluate challenge (DON'T MODIFY):
 if __name__ == "__main__":
-	example = [1,2,3]
-	if functionX(example):
-		print('valid')
-	else:
-		print('invalid')
+	print(optim_sets([1,1,1]))
+# if __name__ == "__main__":
+# 	# example = [1,2,3]
+# 	unittest.main()
+# 	# if functionX(example):
+# 	# 	print('valid')
+# 	# else:
+# 	# 	print('invalid')
