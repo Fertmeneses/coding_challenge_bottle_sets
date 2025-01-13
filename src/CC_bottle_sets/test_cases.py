@@ -1,4 +1,5 @@
-from challenge import optim_sets
+from FM_solution import optim_sets
+#from challenge import optim_sets
 
 def make_blocks(values,samples):
     """
@@ -119,7 +120,7 @@ def test_result(cases):
     # Evaluate all cases:
     N = 0 # Initiate success counts
     for case in cases:
-        output = optim_sets(case)
+        output = optim_sets(case[0])
         if output == case[1]:
             N += 1
 
