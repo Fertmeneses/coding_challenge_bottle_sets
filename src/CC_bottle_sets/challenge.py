@@ -1,20 +1,25 @@
-# To be updated
+def optim_sets(stock):
+	"""
+	Find the maximum number of sets that can be made from the input list
+	{stock}, which represents a collection of bottles. All sets must be
+	made of one or two bottles, and all sets must share the same
+	total volume.
 
-def optim_sets(stock: list) -> int:
+	--- Inputs ---
+	{stock} [List]: Each element represents the volume of a single
+	bottle, in litres.
+	
+	--- Outputs ---
+	{best_N} [Integer]: Maximum number of sets that can be made.
+	"""
 
-	# Implement your code
+	# Implement your code here:
 
-	best_N = len(stock)
+	best_N = 0
 
-	return 2
+	return best_N
 
 # # Evaluate challenge (DON'T MODIFY):
+import os
 if __name__ == "__main__":
-	print(optim_sets([1,1,1]))
-# if __name__ == "__main__":
-# 	# example = [1,2,3]
-# 	unittest.main()
-# 	# if functionX(example):
-# 	# 	print('valid')
-# 	# else:
-# 	# 	print('invalid')
+	os.system('python test_cases.py')
