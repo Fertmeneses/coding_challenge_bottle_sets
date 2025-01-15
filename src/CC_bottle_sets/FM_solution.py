@@ -61,7 +61,6 @@ def optim_sets(stock):
 
 	return best_N
 
-#print(optim_sets([9]))
 # # Evaluate challenge (DON'T MODIFY):
 import os
 if __name__ == "__main__":
