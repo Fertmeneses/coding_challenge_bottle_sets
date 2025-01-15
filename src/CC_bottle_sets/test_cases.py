@@ -40,13 +40,36 @@ def make_blocks(values,samples):
 
     # Calculate optimal number of sets (solution):
     N = max(samples) # Initiate a priori solution
+    # Check all possible sums:
+    sum_vals = [] # Initiate
     for i in range(len(values)):
-        for j in range(i+1,len(values)):
-            sum_vals = values[i] + values[j] # Obtain the sum of any two values
-            if sum_vals in values: # Check if the sum is within the input
-                N = max(N,min([samples[i],samples[j]])
-                    +samples[values.index(sum_vals)]) # Update solution if needed
-
+        for j in range(i,len(values)):
+            sum_vals.append(values[i]+values[j]) # Add the sum value
+    sum_vals = list(set(sum_vals)) # Erase repetitions
+    # Count sets according to sums:
+    for sum_val in sum_vals:
+        check_vals = [] # Auxiliar list to avoid repeated counts
+        # Initiate counts with the summing value itself
+        n_sum = values.count(sum_val)
+        # Sum the contribution of each pair of correct values:
+        for i in range(len(values)):
+            val_i = values[i] # Identify value
+            # Check if there is a pair with this sum value:
+            val_j = sum_val-val_i # Proposed matching value
+            if val_j in values and val_i not in check_vals:
+                check_vals += [val_i,val_j] # Update check list
+                # Add sets to the current {sum_val} value:
+                if val_i == val_j and samples[i]>1:
+                    n_sum += int(samples[i]/2)
+                elif val_i != val_j:
+                    j = values.index(val_j) # Identify index
+                    n_sum += min([samples[i],samples[j]])
+                # if samples == [2,3,2,3,2]:
+                #     print(all_blocks)
+                #     print(sum_val,val_i,val_j,n_sum)
+            # Update N if neccesary:
+            N = max([N,n_sum])
+    # print('aaaaa',N)
     return (all_blocks, N)
 
 def make_gauss_series(n):
@@ -70,7 +93,7 @@ def make_gauss_series(n):
         gauss.append(i)
 
     # Determine optimal number of sets (solution):
-    N = int(n/2)
+    N = -(-n//2) # Half if n is even, rounded up if n is odd
 
     return (gauss,N)
 
@@ -105,7 +128,8 @@ make_blocks([9],[1]),
 make_blocks([40,50,80],[4,2,1]),
 # Complex blocks:
 make_blocks([1,5,6,12,15,30],[3,2,6,8,5,10]),
-make_blocks([4,8,12,16,20],[10,11,12,11,10]),
+make_blocks([4,8,12,16,20],[2,3,2,3,2]),
+make_blocks([4,5,8,12,16,20,22],[10,20,11,12,11,10,6]),
 make_blocks([3,9,12,20,25,30,44,45,47,66],[8,3,2,4,4,7,11,1,5,4]),
 # Gauss series:
 make_gauss_series(23),
@@ -123,6 +147,11 @@ def test_result(cases):
         output = optim_sets(case[0])
         if output == case[1]:
             N += 1
+        else:
+            print(case[0])
+            print('Solution:',case[1])
+            print('Answer:',output)
+            print('--'*10)
 
     # Calculate success rate:
     success_rate = N/len(cases)*100
