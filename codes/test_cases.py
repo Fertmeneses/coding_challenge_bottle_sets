@@ -1,5 +1,5 @@
-from FM_solution import optim_sets
-#from challenge import optim_sets
+from challenge import optim_sets
+#from FM_solution import optim_sets
 
 def make_blocks(values,samples):
     """

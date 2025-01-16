@@ -4,13 +4,11 @@ By Fernando Meneses, 2025-01.
 
 DESCRIPTION
 
-You sell a liquid product that can be stored in bottles of any size. Recently, you received a very particular order: a client wants as many 'sets of one or two bottles having integer numbers of litres' as possible, all of the sets adding the same volume. The volume itself can be any value, for example 1L or 5L (L=litre), what matters is that the number of sets is maximized. As requested, a set can be made of one or two bottles of any size (although only integer number of litres), but the total volume must be the same for all sets. For example, you could arrange three sets of 4 L as follows: [bottle of 4L] + [bottle of 4L] + [bottle of 1L, bottle of 3L].
-
-The mysterious client will pay you per set, disregarding the liquid volume, so you want to maximize the number of sets with the available bottles in your store. You have enough liquid product to fill any amount of bottles of any size. The cost per litre and cost per bottle is minimal, and you are not interested of optimizing the amount liquid product nor the number of bottles, you just want to make as many sets as possible!
+You are a seller of liquid products, which can be stored in bottles of any size. Recently, you received an unusual order: a client requests 'as many sets of bottles as possible, where each set consists of one or two bottles, and all sets must have the same total volume'. The volume, measured in litres, can be any integer value, for example 1L or 5L, what matters is that you maximize the number of sets, as the mysterious client will pay you a very high amount per set, regardless of the liquid volume.
 
 TASK
 
-Design an algorithm that receives as input a list with all the bottles that you have in your store, each one represented by its volume capacity (in litres), and returns the maximum number of sets that can be made (each set can have one or two bottles, and they all have to match in the total volume). Notice that the total volume common to all sets can be any value.
+Design an algorithm that takes as input a list of bottle capacities (in litres) available in your store, and returns the maximum number of sets that can be made. Each set must have one or two bottles, and the total volume of each set must be the same across all sets.
 
 EXAMPLES
 
@@ -22,12 +20,12 @@ Input: [1,1,3,5]
 Output: 2
 Explanation: you can make two sets with 1L each: [1] + [1].
 
-Input: [1,2,5,6,10,11,13,14]
+Input: [1,2,5,6,10,11,20]
 Output: 3
 Explanation: you can make three sets with 11L each: [1,10] + [5,6] + [11].
 
 Input: [12]
-Output: 12
+Output: 1
 Explanation: you can make a single set with 12L: [12].
 
 Input: [1,1,5,5]
@@ -40,4 +38,4 @@ Explanation: there are three multiple configurations for the solution, all of th
 CONSTRAINS:
 
 * The input list will only have integer values within the range 1 to 100.
-* The input list will have from 1 to 200 elements.
+* The input list will have from 1 to 100 elements.
