@@ -52,8 +52,8 @@ Once you are familiar with the instructions, you can start the challenge. If you
 Note: you can also find the challenge description in the file **'Challenge_Description.txt'** within the repository.
 
 <center><figure>
-  <img src="httplink" alt="Conceptual image"> 
-  <figcaption><sup>Caption, prompt.</sup></figcaption>
+  <img src="https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/assets/Image_Conceptual_Bottles.jpg?raw=true" alt="Conceptual image"> 
+  <figcaption><sup>Conceptual image, AI-generated using the prompt "Two shelves with crystal bottles of many sizes and shapes, with an alchemist theme".</sup></figcaption>
 </figure></center>
 
 ### Description
@@ -79,19 +79,22 @@ Design an algorithm that takes as **input** a **list of bottle capacities** (in 
 * The input list will only have integer values within the range 1 to 100.
 * The input list will have from 1 to 100 elements.
 
+INTRODUCE SOME BREAK
+/----------
+/----------
 
 
+SPOILER ALERT! Maybe an image, like a red seal.
 
+## My solution
 
-## Other section
+Introduction
+
+### Analysis and ideas
 
 Description
 
-## Other section 2
-
-Description
-
-## Other section 3
+### Code: step by step
 
 Description
 
