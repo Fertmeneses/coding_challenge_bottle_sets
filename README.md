@@ -104,13 +104,24 @@ As a first guess for the optimal number of sets, I choose the best option within
 
 ### Part 2: Sets with combined bottles
 
+#### Uniqueness of the solution 
+
 It is now time to consider those sets that can be made using a combination of two bottles. The good news is that **for a given value $C$**, the bottles within the input list $L$ can be arranged in a **unique combination using sets having up to 2 bottles**. Let me explain first the opposite case, and **imagine that the rules are different and I can make sets of up to 3 bottles**:
 
-Input list: [1,1,2,2,3,4].
-Rule: sets can have up to three bottles.
-Capacity: $C=4$.
-Configuration A: [2,2] + [3,1] + [4]
-Configuration B: [1,1,2] + [4]
+<div class="warning" style='background-color:rgb(240, 241, 181); color:rgb(0, 0, 0); border-left: solid rgb(226, 194, 78) 4px; border-radius: 6px; padding:0.7em;'>
+<span>
+<p style='margin-top:0.1em; text-align:center'>
+<b>Example for rule "Sets can have up to 3 bottles" </b></p>
+<p style='margin-left:1em;'>
+
+Input list: [1,1,2,2,3,4]. <br>
+Capacity for all sets: $C=4$. <br>
+Configuration A (sets): [2,2] + [3,1] + [4]. <br>
+Configuration B (sets): [1,1,2] + [4].
+
+</p></span>
+</div>
+<br/><br/>
 
 It's clear that the Configuration A, with 3 sets, is better than the Configuration B, with only 2 sets. The main message here is that, **using up to 3 bottles per set, the configuration of bottles for each capacity $C$ may not be unique**, then it's necessary to find them all and choose the best one.
 
@@ -122,12 +133,49 @@ Now let's consider the **actual rule: sets can have up to 2 bottles** and analyz
 
 As this is valid for all bottles within the input list, single bottles with capacity $c_i=C$ will make simple sets, while the other bottles will be arranged in sets $(c_i,c_j)$ that add $c_i+c_j=C$. The conclusion is: **for any capacity $C$ there is a unique configuration of bottles**. 
 
-My **algorithm** will make use of this valuable information: it will **find the unique configuration for each capacity $C$ and count the number of sets $n_C$**. The highest number will be the final answer. However, what I did not determine yet is how to find all possible $C$ values...
+My **algorithm** will make use of this valuable information: it will **find the unique configuration for each capacity $C$ and count the number of sets $n_C$**. The highest number will be the final answer. Therefore, the main question becomes how to analyze all possible $C$ values... If the algorithm doesn't take into account all $C$ values, then there is no certainty that its output will be correct**. On the other hand, a complete but inefficient analysis will find the right answer at the expense of too long computing times. My objective is to **design a method that analyzes all possible $C$ values as efficiently as possible**.
 
-%%%% EXPLAIN BRUTE FORCE METHOD, FROM C=LOWEST TO C=HIGHEST SUM.
-%%%% THEN EXPLAIN MY METHOD AND WHY I COMPARE WITH N_1.
+#### The simplest algorithm
 
+To set a lower limit, the **simplest algorithm** may analyze **all $C$ values** ranging from the minimum capacity in the input list $C_{min} = \min(L)$ to the highest sum $C_{max} = \max(L_i+L_j)$, **one by one**. 
 
+<div class="warning" style='background-color:rgb(240, 241, 181); color:rgb(0, 0, 0); border-left: solid rgb(226, 194, 78) 4px; border-radius: 6px; padding:0.7em;'>
+<span>
+<p style='margin-top:0.1em; text-align:center'>
+<b>Example for simple algorithm analyzing a full range of capacity values </b></p>
+<p style='margin-left:1em;'>
+
+**Input list: [2,2,2,4,4,8,8,8]**. <br>
+Minimum capacity: $C_{min}=2$. <br>
+Maximum capacity: $C_{max}=8+8=16$. <br>
+**Possible capacities: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]**.
+
+</p></span>
+</div>
+<br/><br/>
+
+As you can imagine from the long list of possible capacities, this algorithm is **very inefficient** as it analyzes **values that are not even possible** for the input list.
+
+#### A refined algorithm
+
+A better version of the previous algorithm is one that analyzes only possible capacity values. As **my code** already took a **first guess based on single-bottle sets**, I will avoid repetitions and in **this step** I only take into account capacities that are made of **sets of two bottles**.
+
+<div class="warning" style='background-color:rgb(240, 241, 181); color:rgb(0, 0, 0); border-left: solid rgb(226, 194, 78) 4px; border-radius: 6px; padding:0.7em;'>
+<span>
+<p style='margin-top:0.1em; text-align:center'>
+<b>Example of my code analyzing all possible capacity values </b></p>
+<p style='margin-left:1em;'>
+
+**Input list: [2,2,2,4,4,8,8,8]**. <br>
+Single-bottle set capacities: [2,4,8]. <br>
+Two-bottle set capacities: [4,6,8,10,12,16]. <br>
+**Possible capacities: [2,4,6,8,10,12,16]**.
+
+</p></span>
+</div>
+<br/><br/>
+
+In this example, the **list of possible capacities is complete and none of the values are expendable**. Notice that the values $C=4$ and $C=8$ are shared by both single-bottle and two-bottle lists, as they can be reached in both ways.
 
 ### Code: step by step
 
