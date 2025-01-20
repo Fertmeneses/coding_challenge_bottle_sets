@@ -98,15 +98,15 @@ The "Bottle sets" challenge is based on a relatively simple mathematical problem
 
 ### Part 1: Sets with single bottles
 
-I start my algorithm with the **easiest option: making sets with single bottles**. Within the input list $L$, I count all elements that share the same capacity value $C_i$. The result is a **collection $$\{C\}$$**, which represents the **number of sets** that can be made **for each value $C$** using just **single bottles**.
+I start my algorithm with the **easiest option: making sets with single bottles**. Within the input list $L$, I count all elements that share the same capacity value $C_i$. The result is a **collection {$C$}**, which represents the **number of sets** that can be made **for each value $C$** using just **single bottles**.
 
-As a first guess for the optimal number of sets, I choose the best option within the collection $$\{C\}$$. I name this guess $N_1$. This is the starting point, the next step will take care of a more refined analysis and check if there is a better value than $N_1$. 
+As a first guess for the optimal number of sets, I choose the best option within the collection {$C$}. I name this guess $N_1$. This is the starting point, the next step will take care of a more refined analysis and check if there is a better value than $N_1$. 
 
 ### Part 2: Sets with combined bottles
 
 #### Uniqueness of the solution 
 
-It is now time to consider those sets that can be made using a combination of two bottles. The good news is that **for a given value $$C$$**, the bottles within the input list $L$ can be arranged in a **unique combination using sets having up to 2 bottles**. Let me explain first the opposite case, and **imagine that the rules are different and I can make sets of up to 3 bottles**:
+It is now time to consider those sets that can be made using a combination of two bottles. The good news is that **for a given value $C$**, the bottles within the input list $L$ can be arranged in a **unique combination using sets having up to 2 bottles**. Let me explain first the opposite case, and **imagine that the rules are different and I can make sets of up to 3 bottles**:
 
 <div class="warning" style='background-color:rgb(240, 241, 181); color:rgb(0, 0, 0); border-left: solid rgb(226, 194, 78) 4px; border-radius: 6px; padding:0.7em;'>
 <span>
@@ -115,7 +115,7 @@ It is now time to consider those sets that can be made using a combination of tw
 <p style='margin-left:1em;'>
 
 Input list: [1,1,2,2,3,4]. <br>
-Capacity for all sets: $$C=4$$. <br>
+Capacity for all sets: $C=4$. <br>
 Configuration A (sets): [2,2] + [3,1] + [4]. <br>
 Configuration B (sets): [1,1,2] + [4].
 
@@ -123,9 +123,9 @@ Configuration B (sets): [1,1,2] + [4].
 </div>
 <br/><br/>
 
-It's clear that the Configuration A, with 3 sets, is better than the Configuration B, with only 2 sets. The main message here is that, **using up to 3 bottles per set, the configuration of bottles for each capacity $$C$$ may not be unique**, then it's necessary to find them all and choose the best one.
+It's clear that the Configuration A, with 3 sets, is better than the Configuration B, with only 2 sets. The main message here is that, **using up to 3 bottles per set, the configuration of bottles for each capacity $C$ may not be unique**, then it's necessary to find them all and choose the best one.
 
-Now let's consider the **actual rule: sets can have up to 2 bottles** and analyze a single bottle $L_i$ within the input list, with a capacity $$c_i$$. There are three possible cases when we choose a fixed value $C$ for all sets:
+Now let's consider the **actual rule: sets can have up to 2 bottles** and analyze a single bottle $L_i$ within the input list, with a capacity $c_i$ There are three possible cases when we choose a fixed value $C$ for all sets:
 
 1. If $c_i=C$, then the bottle $L_i$ makes a single set. 
 2. If $c_i>C$, the bottle $L_i$ is useless. 
