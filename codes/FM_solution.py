@@ -17,30 +17,26 @@ def optim_sets(stock):
 
 	# Implement your code here:
 
-	# PART 1: Make a simple initial guess with...
-	# ...sets of single bottles.
+	# PART 1: Make a first guess with single-bottle sets.
 
 	# 1. Identify sub-groups with equal values:
 	vals = list(set(stock)) # Unique values
 	groups = {val: stock.count(val) for val in vals} # key=capacity, value=counts
 
-	# 2. Choose the highest count number as the first guess for {best_N}:
+	# 2. Choose the highest counts as the first guess:
 	best_N = max(groups.values())
 
-	# PART 2: Explore sets with combined bottles and...
-	# ... improve {best_N} if possible.
+	# PART 2: Explore two-bottle sets and improve {best_N} if possible.
 
 	# 3. Check the values of all sums and save them:
-	# (Note: the self-sum i+i is included, even if there is...
-	# ... only one sample of that value)
+	# (Note: the self-sum i+i is included, even if there is only one sample of that value)
 	sum_vals = [] # Initiate
 	for i in range(len(vals)):
 		for j in range(i,len(vals)):
 			sum_vals.append(vals[i]+vals[j]) # Add the sum value
 	sum_vals = list(set(sum_vals)) # Erase repetitions
 
-	# 4. Count the sets made with the {sum_vals} values and update
-	# ... the initial guess {N_best} if needed:
+	# 4. Count the sets with {sum_vals} values and update {N_best} if possible:
 	for sum_val in sum_vals:
 		check_vals = [] # Auxiliar list to avoid repeated counts
 		# Initiate counts with the summing value itself
