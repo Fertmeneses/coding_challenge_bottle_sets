@@ -179,7 +179,31 @@ In this example, the **list of possible capacities is complete and none of the v
 
 ### Code: step by step
 
-Description
+Now that I've explained my reasoning, I will describe the code and explain all the details. To begin with, let's see a pseudo-code summary:
+
+```python
+def optim_set(stock):
+  """
+  From the input {stock} list, return the optimal number of one- and two-bottle sets that can be made with a common total capacity value.
+  """ 
+  # 1. Count bottles for each capacity value, store them in dictionary with [key = capacity], [value = number of bottles]
+  groups = {C: count_bottles(stock,C) for C in stock}
+
+  # 2. Make a first guess for optimal number of sets using only single-bottle sets:
+  best_N = max(groups.values())
+
+  # 3. Identify the capacities of all two-bottle sets:
+  C_sum = [C_i+C_j for (C_i,C_j) in groups]
+
+  # 4. For values in C_sum, count sets and improve {N_best} if possible:
+	for C in C_sum:
+    n_sets = count_sets(C,groups)
+		best_N = max(best_N,n_sets)
+
+  # Finally, return optimal number of sets:
+  return best_N
+```
+
 
 ![Banner](httplink)
 
