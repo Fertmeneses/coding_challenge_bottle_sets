@@ -98,7 +98,7 @@ The "Bottle sets" challenge is based on a relatively simple mathematical problem
 
 ### Part 1: Sets with single bottles
 
-I start my algorithm with the **easiest option: making sets with single bottles**. Within the input list $L$, I count all elements that share the same capacity value $C_i$. The result is a **collection {$C$}**, which represents the **number of sets** that can be made **for each value $C$** using just **single bottles**.
+I start my algorithm with the **easiest option: making sets with single bottles**. Within the input list $L$, I count all elements that share the same capacity value $C_i$. The result is a **collection** {$C$}, which represents the **number of sets** that can be made **for each value $C$** using just **single bottles**.
 
 As a first guess for the optimal number of sets, I choose the best option within the collection {$C$}. I name this guess $N_1$. This is the starting point, the next step will take care of a more refined analysis and check if there is a better value than $N_1$. 
 
@@ -129,11 +129,11 @@ Now let's consider the **actual rule: sets can have up to 2 bottles** and analyz
 
 1. If $c_i=C$, then the bottle $L_i$ makes a single set. 
 2. If $c_i>C$, the bottle $L_i$ is useless. 
-3. If $c_i<C$, the bottle $L_i$ will form a useful set **only** if there is another bottle $L_j$ with capacity $c_j = C - c_i$.
+3. If $c_i<C$, the bottle $L_i$ needs another bottle $L_j$ with capacity $c_j = C - c_i$.
 
 As this is valid for all bottles within the input list, single bottles with capacity $c_i=C$ will make simple sets, while the other bottles will be arranged in sets $(c_i,c_j)$ that add $c_i+c_j=C$. The conclusion is: **for any capacity $C$ there is a unique configuration of bottles**. 
 
-My **algorithm** will make use of this valuable information: it will **find the unique configuration for each capacity $C$ and count the number of sets $n_C$**. The highest number will be the final answer. Therefore, the main question becomes how to analyze all possible $C$ values... If the algorithm doesn't take into account all $C$ values, then there is no certainty that its output will be correct**. On the other hand, a complete but inefficient analysis will find the right answer at the expense of too long computing times. My objective is to **design a method that analyzes all possible $C$ values as efficiently as possible**.
+My **algorithm** will make use of this valuable information: it will **find the unique configuration for each capacity $C$ and count the number of sets $n_C$**. The highest number will be the final answer. Therefore, the main question becomes how to analyze all possible $C$ values... If the algorithm doesn't take into account all $C$ values, then there is no certainty that its output will be correct. On the other hand, a complete but inefficient analysis will find the right answer at the expense of too long computing times. My objective is to **design a method that analyzes all possible $C$ values as efficiently as possible**.
 
 #### The simplest algorithm
 
@@ -145,10 +145,10 @@ To set a lower limit, the **simplest algorithm** may analyze **all $C$ values** 
 <b>Example for simple algorithm analyzing a full range of capacity values </b></p>
 <p style='margin-left:1em;'>
 
-**Input list: [2,2,2,4,4,8,8,8]**. <br>
+<b>Input list: [2,2,2,4,4,8,8,8]</b>. <br>
 Minimum capacity: $C_{min}=2$. <br>
 Maximum capacity: $C_{max}=8+8=16$. <br>
-**Possible capacities: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]**.
+<b>Possible capacities: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]</b>.
 
 </p></span>
 </div>
@@ -166,10 +166,10 @@ A better version of the previous algorithm is one that analyzes only possible ca
 <b>Example of my code analyzing all possible capacity values </b></p>
 <p style='margin-left:1em;'>
 
-**Input list: [2,2,2,4,4,8,8,8]**. <br>
+<b>Input list: [2,2,2,4,4,8,8,8]</b>. <br>
 Single-bottle set capacities: [2,4,8]. <br>
 Two-bottle set capacities: [4,6,8,10,12,16]. <br>
-**Possible capacities: [2,4,6,8,10,12,16]**.
+<b>Possible capacities: [2,4,6,8,10,12,16]</b>.
 
 </p></span>
 </div>
