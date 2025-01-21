@@ -48,7 +48,7 @@ def optim_sets(stock):
 			if val_i not in check_vals:
 				check_vals += [val_i,val_j] # Update check list
 				# Add sets to the current {sum_val} value:
-				if val_i == val_j and groups[val_i]>1:
+				if val_i == val_j:
 					n_sum += int(groups[val_i]/2)
 				elif val_i != val_j and val_j in groups:
 					n_sum += min([groups[val_i],groups[val_j]])
