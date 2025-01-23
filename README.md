@@ -98,7 +98,7 @@ Below, I explain my solution for this challenge, including the overall analysis 
 
 The "Bottle sets" challenge is based on a relatively simple mathematical problem, or at least simple to enunciate. There are many ways to **build a solution**, ranging from **brute force**, by trying all possibilities within the input list, to **elegant mathematical formulae** that provides an exact description. Although the later seems the best approach, there is a competition between the time invested in the solution (up to 45 minutes if you take that challenge) and its elegance. As a consequence, my solution combines **some analysis and general rules with a bit of brute force**. While not the most efficient algorithm, this balance produces a functioning and simple code.
 
-### Uniqueness of the solution 
+### Unique bottle configurations
 
 The good news is that **for any given capacity value $C$**, the bottles in the input list $L$ can be arranged in a **unique combination using sets having up to 2 bottles**. Let me explain first the opposite case, and **imagine that the rules are different and the sets can include up to 3 bottles**:
 
@@ -173,7 +173,7 @@ In this example, the **list of possible capacities is complete and none of the v
 
 ### Code: step by step
 
-Now that I've explained my reasoning, I will introduce a pseudo-code first and then explain all the details of the full code.
+Now that I've explained my reasoning, I first introduce a pseudo-code that outlines the main steps of the algorithm, and then explain all the details of the full code.
 
 #### Pseudo-code
 
@@ -205,7 +205,7 @@ def optim_set(stock):
 ```
 #### Full description of the original code
 
-Finally, let's explain the **full code, step by step**. For the sake of a good understanding, I will display segments of the code, one after the other, along with their explanation. Remember that you can view the original file [**codes/FM_solution.py**](https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/codes/FM_solution.py) in the Github repository.
+Let's break down the **full code, step by step**. For clarity, I will display segments of the code sequentially, along with their explanations. You can view the original file [**codes/FM_solution.py**](https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/codes/FM_solution.py) in the Github repository.
 
 ```python
 def optim_sets(stock):
@@ -217,11 +217,9 @@ def optim_sets(stock):
 
 *Explanation:*
 
-The first line identifies all capacity values from the input list by making a set, and then converts that set into a list $\color{teal}{\text{vals}}$ for future convenience.
+The first line identifies all unique capacity values from the input list $\color{teal}{\text{stock}}$ by converting it into a set, then back to a list, $\color{teal}{\text{vals}}$, for future convenience.
 
-The second line creates the dictionary $\color{teal}{\text{groups}}$ by counting all elements of each capacity value from the list $\color{teal}{\text{vals}}$, using the built-in method *count()*. Each dictionary key is a capacity value, and its respective value is the number of elements in the input list $\color{teal}{\text{stock}}$ with such capacity.
-
-Note: the second line is equivalent to use the *Counter* object from the **collections** library:
+The second line creates the dictionary, $\color{teal}{\text{groups}}$, where each key represents a unique capacity, and its value is the count of occurrences in the $\color{teal}{\text{stock}}$ list. I chose to use the built-in method *count()*, because I prefer to avoid importing libraries and build a more transparent code. Alternatively, I could use the *Counter* object from the **collections** library:
 
 ```python
 # Equivalent method (not in original code):
@@ -229,7 +227,7 @@ from collections import Counter
 groups = Counter(stock)
 ```
 
-However, I preferred to used as many built-in methods as possible in this challenge, and avoid importing libraries so the code is more transparent to the reader. Let's continue:
+Let's continue with the breakdown:
 
 ```python
 #...
@@ -240,7 +238,7 @@ However, I preferred to used as many built-in methods as possible in this challe
 
 *Explanation:*
 
-This simple step just chooses the highest counts value within the $\color{teal}{\text{groups}}$ dictionary. Notice that the capacity associated to that counts value is not important for the final challenge answer, then it's not necessary to keep track of it.
+This step just selects the highest count within the $\color{teal}{\text{groups}}$ dictionary, providing an initial guess for the optimal number of sets.
 
 ```python
 #...
@@ -255,9 +253,11 @@ This simple step just chooses the highest counts value within the $\color{teal}{
 
 *Explanation:*
 
-The list $\color{teal}{\text{sum\_vals}}$ comprises all the capacity values that can be made as a combination of any two single bottles. The first line just initiates the empty list, and the following two lines define a double loop to sample the combination of all elements ($i$,$j$) within the list of unique values $\color{teal}{\text{vals}}$. Inside the loop, each capacity result is added to the list. Once the loop is finished, the list is converted into a set to avoid repeated values, and then to a list for future convenience.
+The list $\color{teal}{\text{sum\_vals}}$ collects all possible capacities formed by combining two bottles. The first line just initiates the list, followed by a double loop that iterates through each pair of elements ($i$,$j$) in $\color{teal}{\text{vals}}$ and adds their sum to $\color{teal}{\text{sum\_vals}}$.
 
-Notice that the double loop iterates over all indexes $i$ within $\color{teal}{\text{vals}}$, but the $j$ index starts from $i$ rather than 0. This avoids repetitions, as commutation of the elements $i$ and $j$ leads to the same sum result. On the other hand, the double loop allows to sum one element $i$ with itself ($j=i$), as the $\color{teal}{\text{stock}}$ list may include bottles with the same capacity. However, this coding block allows to include the value $\color{teal}{\text{vals}}[i]$+$\color{teal}{\text{vals}}[i]$ even when there is only a single bottle with capacity $\color{teal}{\text{vals}}[i]$ in the input $\color{teal}{\text{stock}}$ list. This little problem will be corrected later.
+In the double loop, using $j$ starting from $i$ ensures that each pair is considered only once, avoiding equivalent results. On the other hand, $(i,i)$ pairs are included because the $\color{teal}{\text{stock}}$ list may include bottles with the same capacity.
+
+After the loop, the list is converted into a set to avoid duplicated values, and back into a list for future convenience.
 
 ```python
 #...
@@ -280,33 +280,31 @@ Notice that the double loop iterates over all indexes $i$ within $\color{teal}{\
 
 *Explanation:*
 
-In this final block, the initial guess $\color{teal}{\text{best\_N}}$ (based on single-bottle sets) is compared to collections of sets with capacities from the $\color{teal}{\text{sum\_vals}}$ list, which by definition involve two-bottle sets, but can also include single-bottle sets.
+This final block updates the initial guess $\color{teal}{\text{best\_N}}$ by considering both one- and two-bottle sets. The main loop processes each capacity value in $\color{teal}{\text{sum\_vals}}$, by first initializing an auxiliary list $\color{teal}{\text{check\_list}}$ to track used groups of bottles and prevent double counting. It also defines $\color{teal}{\text{n\_sum}}$, a counter that accumulates the number of sets for the current capacity, starting with the single-bottle counts if available.
 
-The first line defines a loop over all capacity values within $\color{teal}{\text{sum\_vals}}$. Immediately after, for each capacity value an auxiliary list $\color{teal}{\text{check\_list}}$ is initiated, which takes note of the groups of bottles already used and avoid repeated counts. Also, a counting variable $\color{teal}{\text{n\_sum}}$ is defined (initialization is explained later), which accumulates the number of sets for the current capacity value and is finally compared whit $\color{teal}{\text{best\_N}}$.
+Instead of directly iterating through the $\color{teal}{\text{stock}}$ list, the code uses the dictionary $\color{teal}{\text{groups}}$, which summarizes the count of bottles for each capacity. 
 
-The main idea is to use the $\color{teal}{\text{groups}}$ dictionary, which has the information about the bottle counts for each capacity value, rather than directly use the $\color{teal}{\text{stock}}$ list and make sets one by one. For a fixed capacity value $C$, a single key $C_i$ from $\color{teal}{\text{groups}}$ has several options:
+For a fixed capacity $C$ common to all sets, a single key $C_i$ from $\color{teal}{\text{groups}}$ has several options:
 
-1. $C_i = C$, then all bottles with capacity $C_i$ will be used as single-bottle sets. This is how the variable $\color{teal}{\text{n\_sum}}$ is initiated: $\color{teal}{\text{n\_sum}}=\color{teal}{\text{groups}}[C_i]$ if there are any bottles with capacity $C_i$, else $\color{teal}{\text{n\_sum}}=0$.
+1. $C_i = C$, then all bottles with capacity $C_i$ will be used as single-bottle sets (initialization of $\color{teal}{\text{n\_sum}}$).
 
 2. $C_i > C$, then all bottles with capacity $C_i$ won't be used.
 
-3. $C_i = C/2$, then each pair of bottles with capacity $C_i$ will be used as a two-bottle set. The variable $\color{teal}{\text{n\_sum}}$ is updated in this way by dividing the $\color{teal}{\text{groups}}[C_i]$ by two and rounding down (a half pair coming from an odd number of bottles is not accepted).
+3. $C_i = C/2$, then each pair of bottles with capacity $C_i$ will be used as a two-bottle set. Their contribution to $\color{teal}{\text{n\_sum}}$ is determined by halving their count and rounding down (for the odd case).
 
-4. $C_i < C$ **and** $C_i \neq C/2$, then all, some or none bottles with capacity $C_i$ will be used in two-bottle sets, which depends on the number of bottles with capacity $C_j = C - C_i$. If there are no bottles with capacity $C_j$, then none of the bottles with capacity $C_i$ will be used. If there is at least one bottle with capacity $C_j$, then, as any bottle $C_i$ needs a bottle $C_j$ to form a set with capacity $C$, the smallest group will determine how many sets can be made. Consequently, the variable $\color{teal}{\text{n\_sum}}$ is updated by the smallest number of bottles $\color{teal}{\text{groups}}[C_i]$ or $\color{teal}{\text{groups}}[C_j]$.
+4. $C_i < C$ **and** $C_i \neq C/2$, then each bottle with capacity $C_i$ needs another bottle with the complement capacity $C_j = C - C_i$. If there is at least one bottle with capacity $C_j$, the number of two-bottle sets with capacity $C$ is limited by the smallest group size of the two capacities ($C_i,C_j$), and the counter $\color{teal}{\text{n\_sum}}$ is updated accordingly.
 
-The code describes all these options for the $C_i$ capacities by iterating over the $\color{teal}{\text{val\_i}}$ values within $\color{teal}{\text{groups}}$. Option #1 is taken into account right at the beginning, when $\color{teal}{\text{n\_sum}}$ is initiated. All other options come next, and for them the complement capacity $C_j = C - C_i$ is defined as $\color{teal}{\text{val\_j}}$. To avoid repetitions within the loop, there is control stage that checks if any of the keys $\color{teal}{\text{val\_i}}$ or $\color{teal}{\text{val\_j}}$ were already analyzed, in which case the loop continues without any further actions. If neither keys were analyzed yet, both $\color{teal}{\text{val\_i}}$ and $\color{teal}{\text{val\_j}}$ values are added to the $\color{teal}{\text{check\_list}}$ and the process continues as described below.
+The code handles these cases by iterating through keys in $\color{teal}{\text{groups}}$, namely $\color{teal}{\text{val\_i}}$. To prevent double counting, the loop keeps track of the used capacities by a list $\color{teal}{\text{check\_list}}$, which registers the current capacity $\color{teal}{\text{val\_i}}$ and its complement $\color{teal}{\text{val\_j}}$ in each step.
 
-If $\color{teal}{\text{val\_i}}$ is half the current capacity value, meaning $C_i = C/2$ (option #3), then $\color{teal}{\text{n\_sum}}$ is updated accordingly. Else, there is a condition that checks if the complement capacity $\color{teal}{\text{val\_j}}$ is within $\color{teal}{\text{groups}}$ (option #4), and updates $\color{teal}{\text{n\_sum}}$ accordingly. Notice that option #2 is implicitely included in this step, as $C_i>C$ implies $C_j<0$, then $\color{teal}{\text{val\_j}}$ can't be included in $\color{teal}{\text{groups}}$.
+After processing all possible sets for a given capacity, the resulting counter $\color{teal}{\text{n\_sum}}$ is compared with $\color{teal}{\text{N\_best}}$, and the larger value is retained as the new optimal count ($\color{teal}{\text{N\_best}}$).
 
-As a final step within the main loop (over $\color{teal}{\text{sum\_vals}}$), the final counts $\color{teal}{\text{n\_sum}}$ for each capacity $C$ is compared with $\color{teal}{\text{N\_best}}$, and the maximum value from ($\color{teal}{\text{N\_best}}$,$\color{teal}{\text{n\_sum}}$) is defined as the new (or old) optimal number of sets.
-
-Once the main loop is finished, the function $\color{teal}{\text{optim\_sets}}$ returns the optimal number of sets $\color{teal}{\text{N\_best}}$.
+When all capacities in $\color{teal}{\text{sum\_vals}}$ have been evaluated, the function returns $\color{teal}{\text{N\_best}}$, which represents the optimal number of sets for the input $\color{teal}{\text{N\stock}}$ list.
 
 #### Comments and invitation to collaborate
 
-My solution passes 100% of the test cases, meaning it works fine. I'm sure there is room for improvement, so any feedback is very welcome. You can contact me via [LinkedIn](https://www.linkedin.com/in/fernando-meneses-unc/) or email (fertmeneses@gmail.com).
+My solution passes 100% of the test cases, meaning it works fine. I'm sure there is room for improvement, so any feedback is very welcome. Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/fernando-meneses-unc/) or email (fertmeneses@gmail.com).
 
-Also, I invite you to join the [GitHub project](https://github.com/Fertmeneses/coding_challenge_bottle_sets) as a collaborator and upload your own solution if you want to share it.
+Also, I invite you to join the [GitHub project](https://github.com/Fertmeneses/coding_challenge_bottle_sets) as a collaborator to share your own solutions or suggest improvements.
 
 ![Banner](https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/assets/Banner.png?raw=true)
 
