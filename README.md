@@ -1,3 +1,5 @@
+<a href="https://fertmeneses.github.io/" target="_blank"> <img src="https://github.com/Fertmeneses/fertmeneses.github.io/blob/main/assets/website_icon_FM.jpg?raw=true" alt="Logo FM" style="width: 3%;" /> </a> <a href="https://fertmeneses.github.io/" target="_blank"> Go to Home Page </a> 
+
 # Open coding challenge: Bottle sets
 
 This open coding challenge is designed to develop both **programming and data analysis skills**. Anyone can attempt their own solution, **the objective is to pass with 100% accuracy all test cases**. While efficienty in coding and analysis is a plus, the primary aim is accuracy in the solution.
@@ -303,6 +305,12 @@ After processing all possible sets for a given capacity, the resulting counter $
 My solution passes 100% of the test cases, meaning it works fine. I'm sure there is room for improvement, so **any feedback is very welcome**. Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/fernando-meneses-unc/) or email (fertmeneses@gmail.com).
 
 Also, I invite you to join the [GitHub project](https://github.com/Fertmeneses/coding_challenge_bottle_sets) as a collaborator to **share your own solutions or suggest improvements**.
+
+-----
+
+[🔼 Back to top](#open-coding-challenge-bottle-sets)
+
+<a href="https://fertmeneses.github.io/" target="_blank"> <img src="https://github.com/Fertmeneses/fertmeneses.github.io/blob/main/assets/website_icon_FM.jpg?raw=true" alt="Logo FM" style="width: 3%;" /> </a> <a href="https://fertmeneses.github.io/" target="_blank"> Go to Home Page </a> 
 
 ![Banner](https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/assets/Banner.png?raw=true)
 
