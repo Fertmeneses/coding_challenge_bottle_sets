@@ -2,7 +2,7 @@
 
 # Open coding challenge: Bottle sets
 
-This open coding challenge is designed to develop both **programming and data analysis skills**. Anyone can attempt their own solution, **the objective is to pass with 100% accuracy all test cases**. While efficienty in coding and analysis is a plus, the primary aim is accuracy in the solution.
+This open coding challenge is designed to develop both **programming and data analysis skills**. Anyone can attempt their own solution, **the objective is to pass with 100% accuracy all test cases**. While efficiency in coding and analysis is a plus, the primary aim is accuracy in the solution.
 
 ## Introduction
 
