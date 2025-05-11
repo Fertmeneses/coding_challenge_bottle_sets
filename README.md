@@ -1,8 +1,8 @@
-<a href="https://fertmeneses.github.io/" target="_blank"> <img src="https://github.com/Fertmeneses/fertmeneses.github.io/blob/main/assets/website_icon_FM.jpg?raw=true" alt="Logo FM" style="width: 3%;" /> </a> <a href="https://fertmeneses.github.io/" target="_blank"> Go to Home Page </a> 
+<a href="https://fertmeneses.github.io/" target="_blank"> <img src="assets/website_icon_FM.jpg" alt="Logo FM" style="width: 3%;" /> </a> <a href="https://fertmeneses.github.io/" target="_blank"> Go to Home Page </a> 
 
 # Open coding challenge: Bottle sets
 
-This open coding challenge is designed to develop both **programming and data analysis skills**. Anyone can attempt their own solution, **the objective is to pass with 100% accuracy all test cases**. While efficiency in coding and analysis is a plus, the primary aim is accuracy in the solution.
+This open coding challenge is designed to develop both **programming and data analysis skills**. Anyone can attempt their own solution, **the objective is to pass with 100% accuracy all test cases**. While efficienty in coding and analysis is a plus, the primary aim is accuracy in the solution.
 
 ## Introduction
 
@@ -59,7 +59,7 @@ You can then revert these changes to evaluate your solution again.
 Once you are familiar with the instructions, you can start the challenge. If you are setting a timer, start it as soon as you begin reading the following section.
 
 <center><figure>
-  <img src="https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/assets/Image_Conceptual_Bottles.jpg?raw=true" alt="Conceptual image"> 
+  <img src="assets/Image_Conceptual_Bottles.jpg" alt="Conceptual image"> 
   <figcaption><sup>Conceptual image, AI-generated using the prompt: "Two shelves with crystal bottles of many sizes and shapes, with an alchemist theme".</sup></figcaption>
 </figure></center>
 
@@ -93,7 +93,7 @@ Design an algorithm that takes as **input** a **list of bottle capacities** (in 
 ## My solution
 
 <center><figure>
-  <img src="https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/assets/Spoiler_alert.png?raw=true" alt="Spoiler alert"> 
+  <img src="assets/Spoiler_alert.png" alt="Spoiler alert"> 
 </figure></center>
 
 Below, I explain my solution for this challenge, including the overall analysis and step-by-step breakdown of the code.
@@ -310,7 +310,7 @@ Also, I invite you to join the [GitHub project](https://github.com/Fertmeneses/c
 
 [🔼 Back to top](#open-coding-challenge-bottle-sets)
 
-<a href="https://fertmeneses.github.io/" target="_blank"> <img src="https://github.com/Fertmeneses/fertmeneses.github.io/blob/main/assets/website_icon_FM.jpg?raw=true" alt="Logo FM" style="width: 3%;" /> </a> <a href="https://fertmeneses.github.io/" target="_blank"> Go to Home Page </a> 
+<a href="https://fertmeneses.github.io/" target="_blank"> <img src="assets/website_icon_FM.jpg" alt="Logo FM" style="width: 3%;" /> </a> <a href="https://fertmeneses.github.io/" target="_blank"> Go to Home Page </a> 
 
 ![Banner](https://github.com/Fertmeneses/coding_challenge_bottle_sets/blob/main/assets/Banner.png?raw=true)
 
